@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct profiles: View {
+    var name: String
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 4){
+            Image("avatar")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24)
+                .clipShape(Circle())
+            Text(String(name.prefix(5)) + (name.count > 5 ? "..." : ""))
+                .opacity(0.5)
+                .font(.system(size: 16,
+                              weight: .medium,
+                              design: .rounded))
+        }
     }
 }
 
 #Preview {
-    profiles()
+    profiles(name: "Jenniva")
 }

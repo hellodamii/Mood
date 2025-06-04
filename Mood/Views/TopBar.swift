@@ -2,14 +2,28 @@
 //  TopBar.swift
 //  Mood
 //
-//  Created by Busha on 04/06/2025.
+//  Created by Damilare on 04/06/2025.
 //
 
 import SwiftUI
 
 struct TopBar: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geometry in
+            HStack {
+                Text("mood")
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .foregroundColor(.black)
+                Spacer()
+                Image("avatar")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 32, height: 32)
+                    .clipShape(Circle())
+            }
+            .frame(width: geometry.size.width)
+        }
+        .frame(height: 32)
     }
 }
 

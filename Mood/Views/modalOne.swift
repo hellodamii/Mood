@@ -11,12 +11,13 @@ struct ModalOne: View {
     @State private var comment: String = ""
     var moodColor: Color
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 12) {
             Text("What contributed to this feeling?")
                 .font(.system(size: 16, weight: .medium, design: .rounded))
 
             TextField("Add a comment...", text: $comment)
-                .frame(height: 44)
+                .font(.system(size: 12))
+                .frame(height: 36)
                 .padding(.horizontal)
                 .background(Color(moodColor.opacity(0.05)))
                 .cornerRadius(24)
@@ -25,7 +26,7 @@ struct ModalOne: View {
                         Spacer()
                         Text("(optional)")
                             .foregroundColor(.gray)
-                            .font(.system(size: 12))
+                            .font(.system(size: 10))
                             .padding(.trailing, 16)
                     }
                 )
@@ -47,22 +48,22 @@ struct ModalOne: View {
                 // Share mood button
                 Button(action: {}) {
                     Text("Share mood")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
                         .foregroundColor(moodColor)
-                        .frame(width: 100, height: 40)
+                        .frame(width: 90, height: 28)
                         .background(moodColor.opacity(0.1))
                         .clipShape(Capsule())
                 }
             }
-            
-            
-            
-            
+           
         }
         .padding()
         .background(Color.white)
         .cornerRadius(32)
-        
+        .overlay(
+            RoundedRectangle(cornerRadius: 32)
+                .stroke(Color(.modalBorder), lineWidth: 1)
+        )
     }
 }
 

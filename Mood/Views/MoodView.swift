@@ -7,6 +7,7 @@ struct MoodView: View {
     let itemWidth: CGFloat = 260
     let spacing: CGFloat = 0
     @GestureState private var dragOffset: CGFloat = 0
+    @State private var baseOffset: CGFloat = 0
     let moodImages = [
         "Happy",      // Happy
         "calm",       // Calm
@@ -31,7 +32,7 @@ struct MoodView: View {
                 .animation(.easeInOut(duration: 0.3), value: selectedIndex)
             GeometryReader { geo in
                 HStack(spacing: spacing) {
-                    ForEach(0..<moods.count, id: \ .self) { idx in
+                    ForEach(0..<moods.count, id: \.self) { idx in
                         ZStack {
                             VStack {
                                 Image(moodImages[idx])
@@ -41,15 +42,20 @@ struct MoodView: View {
                             }
                         }
                         .scaleEffect(idx == selectedIndex ? 1.1 : 0.9)
-                        .animation(.spring(), value: selectedIndex)
+                        .opacity(idx == selectedIndex ? 1.0 : (abs(idx - selectedIndex) == 1 ? 0.5 : 0.2))
                         .onTapGesture {
-                            withAnimation {
+                            if idx != selectedIndex {
+                                let generator = UIImpactFeedbackGenerator(style: .medium)
+                                generator.impactOccurred()
+                            }
+                            withAnimation(.easeInOut(duration: 0.25)) {
                                 selectedIndex = idx
+                                baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
                             }
                         }
                     }
                 }
-                .offset(x: dragOffset + (geo.size.width / 2 - itemWidth / 2) - CGFloat(selectedIndex) * (itemWidth + spacing))
+                .offset(x: baseOffset + dragOffset)
                 .gesture(
                     DragGesture()
                         .updating($dragOffset) { value, state, _ in
@@ -57,17 +63,35 @@ struct MoodView: View {
                         }
                         .onEnded { value in
                             let drag = value.translation.width
-                            let progress = -drag / (itemWidth + spacing)
-                            let newIndex = (CGFloat(selectedIndex) + progress).rounded().clamped(to: 0...(CGFloat(moods.count - 1)))
-                            withAnimation {
-                                selectedIndex = Int(newIndex)
+                            let threshold: CGFloat = 40
+                            var newIndex = selectedIndex
+                            if drag < -threshold && selectedIndex < moods.count - 1 {
+                                newIndex += 1
+                            } else if drag > threshold && selectedIndex > 0 {
+                                newIndex -= 1
+                            }
+                            if newIndex != selectedIndex {
+                                let generator = UIImpactFeedbackGenerator(style: .light)
+                                generator.impactOccurred()
+                            }
+                            withAnimation(.easeInOut(duration: 0.25)) {
+                                selectedIndex = newIndex
+                                baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
                             }
                         }
                 )
+                .onAppear {
+                    baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
+                }
+                .onChange(of: selectedIndex) {
+                    withAnimation(.easeInOut(duration: 0.25)) {
+                        baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
+                    }
+                }
             }
             .frame(height: itemWidth + 16)
             Text("Swipe to select")
-                .font(.system(size: 12, weight: .medium, design: .rounded))
+                .font(.system(size: 12, weight: .bold, design: .rounded))
                 .foregroundColor(moodColors[selectedIndex].opacity(0.6))
         }
         .frame(maxWidth: .infinity)

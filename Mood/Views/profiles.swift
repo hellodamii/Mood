@@ -18,7 +18,7 @@ struct profiles: View {
                 .clipShape(Circle())
             Text(String(name.prefix(5)) + (name.count > 5 ? "..." : ""))
                 .opacity(0.5)
-                .font(.system(size: 16,
+                .font(.system(size: 12,
                               weight: .medium,
                               design: .rounded))
         }

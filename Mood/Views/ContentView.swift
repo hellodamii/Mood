@@ -46,7 +46,7 @@ struct ContentView: View {
             .padding(.horizontal)
             VStack {
                 Spacer()
-                CustomNavBar()
+             //   CustomNavBar()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

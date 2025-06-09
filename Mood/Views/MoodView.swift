@@ -74,7 +74,7 @@ struct MoodView: View {
                                 let generator = UIImpactFeedbackGenerator(style: .light)
                                 generator.impactOccurred()
                             }
-                            withAnimation(.easeInOut(duration: 0.25)) {
+                            withAnimation(.easeInOut(duration: 0.2)) {
                                 selectedIndex = newIndex
                                 baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
                             }

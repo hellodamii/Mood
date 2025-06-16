@@ -1,55 +1,55 @@
 import SwiftUI
 
 struct CustomNavBar: View {
-    @State private var selectedTab: Int = 0
+    @Binding var showCalendar: Bool
 
     var body: some View {
         HStack {
             // Home
-            Button(action: { selectedTab = 0 }) {
+            Button(action: { /* Home action */ }) {
                 ZStack {
                     Circle()
                         .fill(Color.navBG)
-                        .frame(width: 40, height: 40)
+                        .frame(width: 32, height: 32)
                     Image("home")
                         .scaledToFit()
-                        .frame(width: 18, height: 18)
-                        .opacity(selectedTab == 0 ? 1.0 : 0.5)
+                        .frame(width: 16, height: 16)
+                        .opacity(1.0)
                 }
             }
             Spacer()
-            Button(action: { selectedTab = 1 }) {
+            Button(action: { showCalendar = true }) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 40)
+                    RoundedRectangle(cornerRadius: 32)
                         .fill(Color.navBG)
-                        .frame(width: 70, height: 52)
+                        .frame(width: 54, height: 38)
                     Image("calender")
                         .scaledToFit()
-                        .frame(width: 24, height: 24)
+                        .frame(width: 16, height: 16)
                         .foregroundColor(.gray)
-                        .opacity(selectedTab == 1 ? 1.0 : 0.5)
+                        .opacity(0.5)
                 }
             }
             Spacer()
             // Mood/Smile
-            Button(action: { selectedTab = 2 }) {
+            Button(action: { /* Mood action */ }) {
                 ZStack {
                     Circle()
                         .fill(Color.navBG)
-                        .frame(width: 40, height: 40)
+                        .frame(width: 32, height: 32)
                     Image("smile")
                         .scaledToFit()
-                        .frame(width: 18, height: 18)
-                        .opacity(selectedTab == 2 ? 1.0 : 0.5)
+                        .frame(width: 16, height: 16)
+                        .opacity(0.5)
                 }
             }
         }
-        .padding(.horizontal, 32)
-        .padding(.vertical, 8)
-        .background(Color.white.opacity(0.75))
+        .padding(.horizontal, 20)
+        .padding(.vertical, 4)
+        .background(Color.white.opacity(0.5))
     }
 }
 
 #Preview {
-    CustomNavBar()
+    CustomNavBar(showCalendar: .constant(false))
 } 

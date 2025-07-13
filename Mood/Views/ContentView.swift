@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     @State private var selectedDate: Date = Date()
     @State private var selectedMoodIndex: Int = 1
@@ -31,47 +32,21 @@ struct ContentView: View {
         "excitedBG",    // Excited
         "frustratedBG"  // Frustrated
     ]
-    
-    
+
     var body: some View {
         ZStack {
             Color(moodBGNames[selectedMoodIndex])
                 .ignoresSafeArea()
-            
             VStack(spacing: 24) {
-                
                 VStack(spacing: 16){
                     TopBar()
                     DateBar(selectedDate: $selectedDate)
                 }
                 MoodView(selectedIndex: $selectedMoodIndex, moodColors: moodColors)
                 ModalOne(moodColor: moodColors[selectedMoodIndex])
-                
-                Spacer()
-                
+        
             }
             .padding(.horizontal)
-           
-            VStack {
-                Spacer()
-                CustomNavBar(showCalendar: $showCalendar)
-            }
-            
-            // Floating sheet overlay
-            if showCalendar {
-                Color.black.opacity(0.5)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        showCalendar = false
-                    }
-                VStack {
-                    Spacer()
-                    HistoryView(chevronColor: moodColors[selectedMoodIndex])
-                        .padding(.bottom, 16)
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-               .ignoresSafeArea(.keyboard)
-            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -80,3 +55,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+

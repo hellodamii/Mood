@@ -42,13 +42,6 @@ struct DateBar: View {
                         Text(dateFormatter.string(from: date))
                             .font(.system(size: isSelected ? 22 : 18, weight: .heavy, design: .rounded))
                             .foregroundColor(isSelected ? Color.black : Color.black.opacity(0.5))
-                        if date <= Date() {
-                            Circle()
-                                .fill(Color(.pink))
-                                .frame(width: 4, height: 4)
-                        } else {
-                            Spacer().frame(height: 4)
-                        }
                     }
                     .onTapGesture {
                         selectedDate = date

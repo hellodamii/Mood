@@ -1,55 +1,51 @@
 import SwiftUI
 
+enum Tabs {
+    case mood, history, profile
+}
+
 struct CustomNavBar: View {
-    @Binding var showCalendar: Bool
+    @State var selectedTab: Tabs = .mood
+    @State private var showHistorySheet = false
+    @State private var previousTab: Tabs = .mood
+    @State private var selectedMoodIndex: Int = 1
 
     var body: some View {
-        HStack {
-            // Home
-            Button(action: { /* Home action */ }) {
-                ZStack {
-                    Circle()
-                        .fill(Color.navBG)
-                        .frame(width: 32, height: 32)
-                    Image("home")
-                        .scaledToFit()
-                        .frame(width: 16, height: 16)
-                        .opacity(1.0)
-                }
+        TabView(selection: $selectedTab) {
+            Tab("Home", systemImage: "house", value: .mood) {
+                ContentView()
             }
-            Spacer()
-            Button(action: { showCalendar = true }) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 32)
-                        .fill(Color.navBG)
-                        .frame(width: 54, height: 38)
-                    Image("calender")
-                        .scaledToFit()
-                        .frame(width: 16, height: 16)
-                        .foregroundColor(.gray)
-                        .opacity(0.5)
-                }
+            
+            Tab("History", systemImage: "calendar", value: .history) {
+          HistoryView()
+                
             }
-            Spacer()
-            // Mood/Smile
-            Button(action: { /* Mood action */ }) {
-                ZStack {
-                    Circle()
-                        .fill(Color.navBG)
-                        .frame(width: 32, height: 32)
-                    Image("smile")
-                        .scaledToFit()
-                        .frame(width: 16, height: 16)
-                        .opacity(0.5)
-                }
+            
+            Tab("Profile", systemImage: "person", value: .profile) {
+               //
             }
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 4)
-        .background(Color.white.opacity(0.5))
+        .onChange(of: selectedTab) {
+            if selectedTab == .history {
+                showHistorySheet = true
+                selectedTab = previousTab // Reset to previous tab
+            } else {
+                previousTab = selectedTab
+            }
+        }
+        .sheet(isPresented: $showHistorySheet) {
+            VStack{
+            HistoryView()
+            Spacer()
+        }
+            .padding(.vertical, 32)
+            .presentationDetents([.large])
+        }
+        
+       
     }
 }
 
 #Preview {
-    CustomNavBar(showCalendar: .constant(false))
+    CustomNavBar()
 } 

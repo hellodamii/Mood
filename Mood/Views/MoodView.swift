@@ -42,7 +42,7 @@ struct MoodView: View {
                             }
                         }
                         .scaleEffect(idx == selectedIndex ? 1.1 : 0.9)
-                        .opacity(idx == selectedIndex ? 1.0 : (abs(idx - selectedIndex) == 1 ? 0.5 : 0.2))
+                        .opacity(idx == selectedIndex ? 1.0 : (abs(idx - selectedIndex) == 1 ? 0.5 : 0.5))
                         .onTapGesture {
                             if idx != selectedIndex {
                                 let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -89,10 +89,10 @@ struct MoodView: View {
                     }
                 }
             }
-            .frame(height: itemWidth + 16)
+            .frame(height: itemWidth + 8)
             Text("Swipe to select")
                 .font(.system(size: 12, weight: .bold, design: .rounded))
-                .foregroundColor(moodColors[selectedIndex].opacity(0.6))
+                .foregroundColor(.primary.opacity(0.6))
         }
         .frame(maxWidth: .infinity)
     }

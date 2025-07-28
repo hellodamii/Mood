@@ -5,6 +5,7 @@ enum Tabs {
 }
 
 struct CustomNavBar: View {
+    var moodColor: Color
     @State var selectedTab: Tabs = .mood
     @State private var showHistorySheet = false
     @State private var previousTab: Tabs = .mood
@@ -15,6 +16,7 @@ struct CustomNavBar: View {
             Tab("Home", systemImage: "house", value: .mood) {
                 ContentView()
             }
+        
             
             Tab("History", systemImage: "calendar", value: .history) {
           HistoryView()
@@ -22,9 +24,10 @@ struct CustomNavBar: View {
             }
             
             Tab("Profile", systemImage: "person", value: .profile) {
-               //
+               ProfileView()
             }
         }
+        .tint(.primary)
         .onChange(of: selectedTab) {
             if selectedTab == .history {
                 showHistorySheet = true
@@ -39,13 +42,15 @@ struct CustomNavBar: View {
             Spacer()
         }
             .padding(.vertical, 32)
+            .background(Color(.systemBackground))
             .presentationDetents([.large])
         }
+
         
        
     }
 }
 
 #Preview {
-    CustomNavBar()
+    CustomNavBar(moodColor: .green)
 } 

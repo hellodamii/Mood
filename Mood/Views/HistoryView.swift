@@ -32,7 +32,6 @@ struct HistoryView: View {
 
                                 
         }
-            
         .padding(.horizontal)
     }
     }

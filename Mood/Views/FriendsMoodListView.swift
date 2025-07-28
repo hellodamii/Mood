@@ -23,25 +23,25 @@ struct FriendMoodRow: View {
                 HStack(spacing: 0) {
                     Text(entry.name)
                         .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .lineLimit(1)
                         .truncationMode(.tail)
                     Text(" is feeling ")
                         .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(.gray)
-                    Text(entry.mood)
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(.gray)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
+                        .foregroundColor(.secondary)
+                                            Text(entry.mood)
+                            .font(.system(size: 16, weight: .medium, design: .rounded))
+                            .foregroundColor(.primary)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
                 }
                 Spacer()
                 Text(entry.timeAgo)
                     .font(.system(size: 8, weight: .medium, design: .rounded))
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
-                    .foregroundColor(.black.opacity(0.5))
-                    .background(Color.white)
+                    .foregroundColor(.primary)
+                    .background(Color.secondary.opacity(0.5))
                     .clipShape(Capsule())
             }
             .padding()
@@ -56,7 +56,7 @@ struct FriendsMoodListView: View {
         VStack(alignment: .leading, spacing: 6){
             Text("20-05-2025")
                 .font(.system(size: 13, weight: .semibold, design: .rounded))
-                .foregroundStyle(.black.opacity(0.5))
+                .foregroundStyle(.primary.opacity(0.5))
             HStack {
                 ForEach(entries) { entry in
                     FriendMoodRow(entry: entry)

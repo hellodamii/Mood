@@ -13,7 +13,7 @@ struct TopBar: View {
             HStack {
                 Text("mood")
                     .font(.system(size: 18, weight: .bold, design: .rounded))
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                 Spacer()
                 Image("avatar")
                     .resizable()

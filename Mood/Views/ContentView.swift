@@ -37,8 +37,8 @@ struct ContentView: View {
         ZStack {
             Color(moodBGNames[selectedMoodIndex])
                 .ignoresSafeArea()
-            VStack(spacing: 24) {
-                VStack(spacing: 16){
+            VStack(spacing: 18) {
+                VStack(spacing: 18){
                     TopBar()
                     DateBar(selectedDate: $selectedDate)
                 }

@@ -11,21 +11,21 @@ struct ModalOne: View {
     @State private var comment: String = ""
     var moodColor: Color
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 16) {
             Text("What contributed to this feeling?")
                 .font(.system(size: 16, weight: .medium, design: .rounded))
 
             TextField("Add a comment...", text: $comment)
                 .font(.system(size: 12))
-                .frame(height: 36)
+                .frame(height: 40)
                 .padding(.horizontal)
-                .background(Color(moodColor.opacity(0.05)))
+                .background(.secondary.opacity(0.2))
                 .cornerRadius(24)
                 .overlay(
                     HStack {
                         Spacer()
                         Text("(optional)")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                             .font(.system(size: 10))
                             .padding(.trailing, 16)
                     }
@@ -38,10 +38,10 @@ struct ModalOne: View {
                 // Plus icon
                 ZStack {
                     Circle()
-                        .fill(Color(.systemGray6))
-                        .frame(width: 28, height: 26)
+                        .fill(.secondary.opacity(0.2))
+                        .frame(width: 28, height: 28)
                     Image(systemName: "plus")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                         .font(.system(size: 12, weight: .medium))
                 }
                 Spacer()
@@ -50,7 +50,7 @@ struct ModalOne: View {
                     Text("Share mood")
                         .font(.system(size: 12, weight: .medium, design: .rounded))
                         .foregroundColor(moodColor)
-                        .frame(width: 90, height: 28)
+                        .frame(width: 90, height: 32)
                         .background(moodColor.opacity(0.1))
                         .clipShape(Capsule())
                 }
@@ -58,11 +58,11 @@ struct ModalOne: View {
            
         }
         .padding()
-        .background(Color.white)
+        .background(Color(.systemGray6))
         .cornerRadius(32)
         .overlay(
             RoundedRectangle(cornerRadius: 32)
-                .stroke(Color(.modalBorder), lineWidth: 1)
+                .stroke(Color(.separator), lineWidth: 1)
         )
     }
 }

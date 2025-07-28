@@ -11,7 +11,7 @@ import SwiftUI
 struct MoodApp: App {
     var body: some Scene {
         WindowGroup {
-        CustomNavBar()
+            CustomNavBar(moodColor: .green)
         }
     }
 }

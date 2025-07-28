@@ -38,10 +38,10 @@ struct DateBar: View {
                     VStack(alignment: .center, spacing: 4) {
                         Text(dayFormatter.string(from: date).prefix(1))
                             .font(.system(size: 12, weight: .medium, design: .rounded))
-                            .foregroundColor(.black.opacity(0.5))
+                            .foregroundColor(.primary.opacity(0.5))
                         Text(dateFormatter.string(from: date))
                             .font(.system(size: isSelected ? 22 : 18, weight: .heavy, design: .rounded))
-                            .foregroundColor(isSelected ? Color.black : Color.black.opacity(0.5))
+                            .foregroundColor(isSelected ? Color.primary : Color.primary.opacity(0.5))
                     }
                     .onTapGesture {
                         selectedDate = date

@@ -81,7 +81,7 @@ struct ProfileView: View {
                         icon: "person.fill",
                         iconColor: .purple,
                         title: "Personal Details",
-                        subtitle: "Adjust your name and email"
+                        subtitle: "Edit your name and email"
                     )
                     Divider()
                         .padding(.leading, 76)
@@ -99,7 +99,7 @@ struct ProfileView: View {
                         icon: "bell.fill",
                         iconColor: .green,
                         title: "Notifications",
-                        subtitle: "Adjust how you receive alerts"
+                        subtitle: "Edit how you receive alerts"
                     )
                     
                     
@@ -131,7 +131,7 @@ struct ProfileView: View {
                             icon: "trash.fill",
                             iconColor: .red,
                             title: "Delete account",
-                            subtitle: "I know your address"
+                            subtitle: "I know your addrss" 
                         )
                     }
                 }

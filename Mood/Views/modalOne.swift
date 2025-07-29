@@ -8,7 +8,19 @@
 import SwiftUI
 
 struct ModalOne: View {
+    
+    let moodBGNames = [
+        "happyBG",      // Happy
+        "calmBG",       // Calm
+        "neutralBG",    // Neutral
+        "sadBG",        // Sad
+        "anxiousBG",    // Anxious
+        "angryBG",      // Angry
+        "excitedBG",    // Excited
+        "frustratedBG"  // Frustrated
+    ]
     @State private var comment: String = ""
+    @State private var selectedMoodIndex: Int = 1
     var moodColor: Color
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -51,14 +63,14 @@ struct ModalOne: View {
                         .font(.system(size: 12, weight: .medium, design: .rounded))
                         .foregroundColor(moodColor)
                         .frame(width: 90, height: 32)
-                        .background(moodColor.opacity(0.1))
+                        .background(moodColor.opacity(0.3))
                         .clipShape(Capsule())
                 }
             }
            
         }
         .padding()
-        .background(Color(.systemGray6))
+        .background(Color(moodBGNames[selectedMoodIndex]))
         .cornerRadius(32)
         .overlay(
             RoundedRectangle(cornerRadius: 32)

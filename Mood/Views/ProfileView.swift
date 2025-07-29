@@ -24,7 +24,7 @@ struct SettingsRow: View {
                     .frame(width: 40, height: 40)
                 Image(systemName: icon)
                     .foregroundColor(.white)
-                    .font(.system(size: 18, weight: .medium))
+                    .font(.system(size: 16, weight: .medium))
             }
             
             // Text content
@@ -131,7 +131,7 @@ struct ProfileView: View {
                             icon: "trash.fill",
                             iconColor: .red,
                             title: "Delete account",
-                            subtitle: "I know your addrss" 
+                            subtitle: "I know your address" 
                         )
                     }
                 }

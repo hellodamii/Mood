@@ -1,3 +1,10 @@
+//
+//  ProfileView.swift
+//  Mood
+//
+//  Created by Damilare on 04/06/2025.
+//
+
 import SwiftUI
 
 struct SettingsRow: View {
@@ -53,12 +60,15 @@ struct SettingsRow: View {
 }
 
 struct ProfileView: View {
+    @State private var showingPersonalDetails = false
+    @State private var userName: String = UserDefaults.getUserFullName()
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 2) {
                 // Header
                 HStack {
-                    Text("Damilare")
+                    Text(userName)
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(.primary)
                     Spacer()
@@ -77,12 +87,17 @@ struct ProfileView: View {
                     
                     
                     
-                    SettingsRow(
-                        icon: "person.fill",
-                        iconColor: .purple,
-                        title: "Personal Details",
-                        subtitle: "Edit your name and email"
-                    )
+                    Button(action: {
+                        showingPersonalDetails = true
+                    }) {
+                        SettingsRow(
+                            icon: "person.fill",
+                            iconColor: .purple,
+                            title: "Personal Details",
+                            subtitle: "Edit your name and email"
+                        )
+                    }
+                    .buttonStyle(PlainButtonStyle())
                     Divider()
                         .padding(.leading, 76)
                     SettingsRow(
@@ -152,12 +167,23 @@ struct ProfileView: View {
                 }
                 .padding(.bottom)
             }
-            
-           
+            .sheet(isPresented: $showingPersonalDetails) {
+                PersonalDetails()
+            }
+            .onChange(of: showingPersonalDetails) { _, isPresented in
+                if !isPresented {
+                    // Update the user name when the sheet is dismissed
+                    userName = UserDefaults.getUserFullName()
+                }
+            }
+            .onAppear {
+                // Load user name when view appears
+                userName = UserDefaults.getUserFullName()
+            }
         }
     }
 }
 
-#Preview {
-    ProfileView()
-} 
+//#Preview {
+//    ProfileView()
+//} 

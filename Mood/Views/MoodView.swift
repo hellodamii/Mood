@@ -1,3 +1,10 @@
+//
+//  MoodView.swift
+//  Mood
+//
+//  Created by Damilare on 04/06/2025.
+//
+
 import SwiftUI
 
 struct MoodView: View {

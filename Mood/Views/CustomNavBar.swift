@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Tabs {
-    case mood, history, profile
+    case mood, history, profile, friends
 }
 
 struct CustomNavBar: View {
@@ -21,6 +21,10 @@ struct CustomNavBar: View {
             Tab("History", systemImage: "calendar", value: .history) {
           HistoryView()
                 
+            }
+            
+            Tab("Friends", systemImage: "person.2.fill", value: .friends) {
+              
             }
             
             Tab("Profile", systemImage: "person", value: .profile) {

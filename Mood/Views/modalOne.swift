@@ -70,12 +70,13 @@ struct ModalOne: View {
            
         }
         .padding()
-        .background(Color(moodBGNames[selectedMoodIndex]))
+        .glassEffect(.clear, in: .rect(cornerRadius: 32))
+//        .background(Color(moodBGNames[selectedMoodIndex]))
         .cornerRadius(32)
-        .overlay(
-            RoundedRectangle(cornerRadius: 32)
-                .stroke(Color(.separator), lineWidth: 1)
-        )
+//        .overlay(
+//            RoundedRectangle(cornerRadius: 32)
+//                .stroke(Color(.separator), lineWidth: 1)
+//        )
     }
 }
 

@@ -78,19 +78,21 @@ struct PersonalDetails: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Email")
                             .font(.system(size: 16, weight: .medium, design: .rounded))
-                            .foregroundColor(.primary)
+                            .foregroundColor(.secondary)
                         
                         TextField("Enter your email", text: $email)
                             .font(.system(size: 16, weight: .regular, design: .rounded))
                             .keyboardType(.emailAddress)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
+                            .disabled(true)
+                            .foregroundColor(.secondary)
                             .padding()
                             .background(Color(.systemGray6).opacity(0.5))
                             .cornerRadius(12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color(.separator), lineWidth: 1)
+                                    .stroke(Color(.systemGray4), lineWidth: 1)
                             )
                     }
                 }
@@ -101,12 +103,12 @@ struct PersonalDetails: View {
                 // Save Button
                 Button(action: saveUserData) {
                     Text("Save Changes")
-                        .font(.system(size: 18, weight: .semibold, design: .rounded))
+                        .font(.system(size: 16, weight: .semibold, design: .rounded))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 56)
-                        .background(isFormValid ? Color.happy : Color.gray)
-                        .cornerRadius(16)
+                        .frame(height: 52)
+                        .background(isFormValid ? Color.sad : Color.gray)
+                        .cornerRadius(32)
                 }
                 .disabled(!isFormValid)
                 .padding(.horizontal)
@@ -146,8 +148,7 @@ struct PersonalDetails: View {
     // Computed property to check if form is valid
     private var isFormValid: Bool {
         !firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        isValidEmail(email)
+        !lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
     // Email validation
@@ -187,11 +188,7 @@ struct PersonalDetails: View {
             return
         }
         
-        guard isValidEmail(trimmedEmail) else {
-            errorMessage = "Please enter a valid email address"
-            showingErrorAlert = true
-            return
-        }
+
         
         // Save to UserDefaults
         defaults.set(trimmedFirstName, forKey: firstNameKey)

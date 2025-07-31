@@ -61,6 +61,7 @@ struct SettingsRow: View {
 
 struct ProfileView: View {
     @State private var showingPersonalDetails = false
+    @State private var showingNotificationSettings = false
     @State private var userName: String = UserDefaults.getUserFullName()
     
     var body: some View {
@@ -110,12 +111,17 @@ struct ProfileView: View {
                     Divider()
                         .padding(.leading, 76)
                     
-                    SettingsRow(
-                        icon: "bell.fill",
-                        iconColor: .green,
-                        title: "Notifications",
-                        subtitle: "Edit how you receive alerts"
-                    )
+                    Button(action: {
+                        showingNotificationSettings = true
+                    }) {
+                        SettingsRow(
+                            icon: "bell.fill",
+                            iconColor: .green,
+                            title: "Notifications",
+                            subtitle: UserDefaults.getNotificationPreferenceDisplayName()
+                        )
+                    }
+                    .buttonStyle(PlainButtonStyle())
                     
                     
                     
@@ -132,7 +138,7 @@ struct ProfileView: View {
                         .padding(.horizontal)
                         .padding(.top, 32)
                     
-                    VStack(spacing:2){
+                    VStack(spacing:0){
                         SettingsRow(
                             icon: "rectangle.portrait.and.arrow.right",
                             iconColor: .pink,
@@ -170,6 +176,9 @@ struct ProfileView: View {
             .sheet(isPresented: $showingPersonalDetails) {
                 PersonalDetails()
             }
+            .sheet(isPresented: $showingNotificationSettings) {
+                NotificationSettings()
+            }
             .onChange(of: showingPersonalDetails) { _, isPresented in
                 if !isPresented {
                     // Update the user name when the sheet is dismissed
@@ -184,6 +193,6 @@ struct ProfileView: View {
     }
 }
 
-//#Preview {
-//    ProfileView()
-//} 
+#Preview {
+    ProfileView()
+} 

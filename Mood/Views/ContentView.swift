@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var selectedDate: Date = Date()
     @State private var selectedMoodIndex: Int = 1
     @State private var showCalendar: Bool = false
+    @Environment(\.colorScheme) private var colorScheme
     let moodColors: [Color] = [
         .happy, // Happy
         .calm, // Calm
@@ -35,8 +36,18 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            Color(moodBGNames[selectedMoodIndex])
-                .ignoresSafeArea()
+            // Dynamic gradient background based on selected mood color and color scheme
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    moodColors[selectedMoodIndex].opacity(colorScheme == .dark ? 0.4 : 0.2),
+                    moodColors[selectedMoodIndex].opacity(colorScheme == .dark ? 0.2 : 0.1),
+                    Color(.systemBackground).opacity(colorScheme == .dark ? 0.9 : 0.95)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+            
             VStack(spacing: 18) {
                 VStack(spacing: 18){
                     TopBar()

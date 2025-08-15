@@ -126,8 +126,6 @@ struct ProfileView: View {
                     
                     
                 }
-                .background(Color(.systemBackground))
-                .cornerRadius(16)
                 
                 
                 // Danger zone
@@ -156,8 +154,7 @@ struct ProfileView: View {
                         )
                     }
                 }
-                .background(Color(.systemBackground))
-                .cornerRadius(16)
+//
                 
                 Spacer()
                 VStack{

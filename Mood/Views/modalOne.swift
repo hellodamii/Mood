@@ -26,6 +26,7 @@ struct ModalOne: View {
         VStack(alignment: .leading, spacing: 16) {
             Text("What contributed to this feeling?")
                 .font(.system(size: 16, weight: .medium, design: .rounded))
+                .foregroundStyle(.primary)
 
             TextField("Add a comment...", text: $comment)
                 .font(.system(size: 12))

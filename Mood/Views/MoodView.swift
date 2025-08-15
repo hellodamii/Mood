@@ -30,10 +30,10 @@ struct MoodView: View {
         VStack(spacing: 8) {
             Text("Currently, I feel")
                 .font(.system(size: 16, weight: .medium, design: .rounded))
-                .foregroundColor(moodColors[selectedIndex])
+                .foregroundColor(.primary)
             Text(moods[selectedIndex])
                 .font(.system(size: 48, weight: .bold, design: .rounded))
-                .foregroundColor(moodColors[selectedIndex])
+                .foregroundColor(.primary)
                 .id("mood_\(selectedIndex)")
                 .transition(.opacity.combined(with: .scale))
                 .animation(.easeInOut(duration: 0.3), value: selectedIndex)

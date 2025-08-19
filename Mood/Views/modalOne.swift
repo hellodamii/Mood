@@ -22,6 +22,7 @@ struct ModalOne: View {
     @State private var comment: String = ""
     @State private var selectedMoodIndex: Int = 1
     var moodColor: Color
+    var isKeyboardVisible: Bool = false
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("What contributed to this feeling?")
@@ -74,10 +75,10 @@ struct ModalOne: View {
         .glassEffect(.clear, in: .rect(cornerRadius: 32))
 //        .background(Color(moodBGNames[selectedMoodIndex]))
         .cornerRadius(32)
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 32)
-//                .stroke(Color(.separator), lineWidth: 1)
-//        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 32)
+                .stroke(Color(.separator), lineWidth: 0.2)
+        )
     }
 }
 

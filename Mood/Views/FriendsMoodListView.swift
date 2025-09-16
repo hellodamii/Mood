@@ -62,8 +62,9 @@ struct FriendsMoodListView: View {
                     FriendMoodRow(entry: entry)
                 }
             }
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(18)
+           .background(Color(.secondarySystemBackground))
+            //.glassEffect(.clear, in: .rect(cornerRadius: 32))
+            .cornerRadius(16)
         }
     }
 }

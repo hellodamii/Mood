@@ -17,7 +17,6 @@ struct CustomNavBar: View {
                 ContentView()
             }
         
-            
             Tab("History", systemImage: "calendar", value: .history) {
           HistoryView()
                 
@@ -46,9 +45,13 @@ struct CustomNavBar: View {
             Spacer()
         }
             .padding(.vertical, 32)
-            .background(Color(.systemBackground))
+            // Remove the opaque background to allow glass
+            //.background(Color(.systemBackground))
             .presentationDetents([.large])
+            .presentationBackground(.clear) // fully transparent, lets system glass show
+            // .presentationBackground(.thinMaterial) // or a material if you prefer
         }
+        
 
         
        

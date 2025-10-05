@@ -15,11 +15,17 @@ struct TopBar: View {
                     .font(.system(size: 18, weight: .bold, design: .rounded))
                     .foregroundColor(.primary)
                 Spacer()
-                Image("avatar")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 32, height: 32)
-                    .clipShape(Circle())
+                NavigationLink {
+                    ProfileView()
+                } label: {
+                    Image("avatar")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 32, height: 32)
+                        .clipShape(Circle())
+                        .accessibilityLabel("Open Profile")
+                }
+                .buttonStyle(.plain)
             }
             .frame(width: geometry.size.width)
         }
@@ -28,5 +34,7 @@ struct TopBar: View {
 }
 
 #Preview {
-    TopBar()
+    NavigationStack {
+        TopBar()
+    }
 }

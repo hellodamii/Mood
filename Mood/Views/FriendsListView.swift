@@ -47,15 +47,15 @@ struct FriendsListView: View {
             Spacer()
             
             // Invite friends button
-            Button("Invite friends") {
-                // Invite friends action
+            NavigationLink(destination: InviteFriendsView()) {
+                Text("Invite friends")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .background(Color.blue)
+                    .clipShape(Capsule())
             }
-            .font(.system(size: 16, weight: .medium, design: .rounded))
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .frame(height: 50)
-            .background(Color.blue)
-            .clipShape(Capsule())
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
         }

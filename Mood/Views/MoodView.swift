@@ -14,7 +14,6 @@ struct MoodView: View {
     let itemWidth: CGFloat = 260
     let spacing: CGFloat = 0
     @GestureState private var dragOffset: CGFloat = 0
-    @State private var baseOffset: CGFloat = 0
     let moodImages = [
         "Happy",      // Happy
         "calm",       // Calm
@@ -38,6 +37,8 @@ struct MoodView: View {
                 .transition(.opacity.combined(with: .scale))
                 .animation(.easeInOut(duration: 0.3), value: selectedIndex)
             GeometryReader { geo in
+                // Compute the horizontal offset dynamically from geometry and the selected index
+                let centeredOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
                 HStack(spacing: spacing) {
                     ForEach(0..<moods.count, id: \.self) { idx in
                         ZStack {
@@ -57,12 +58,12 @@ struct MoodView: View {
                             }
                             withAnimation(.easeInOut(duration: 0.25)) {
                                 selectedIndex = idx
-                                baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
                             }
                         }
                     }
                 }
-                .offset(x: baseOffset + dragOffset)
+                .offset(x: centeredOffset + dragOffset)
+                .animation(.easeInOut(duration: 0.25), value: selectedIndex)
                 .gesture(
                     DragGesture()
                         .updating($dragOffset) { value, state, _ in
@@ -83,18 +84,9 @@ struct MoodView: View {
                             }
                             withAnimation(.easeInOut(duration: 0.2)) {
                                 selectedIndex = newIndex
-                                baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
                             }
                         }
                 )
-                .onAppear {
-                    baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
-                }
-                .onChange(of: selectedIndex) {
-                    withAnimation(.easeInOut(duration: 0.25)) {
-                        baseOffset = geo.size.width / 2 - itemWidth / 2 - CGFloat(selectedIndex) * (itemWidth + spacing)
-                    }
-                }
             }
             .frame(height: itemWidth + 8)
             Text("Swipe to select")

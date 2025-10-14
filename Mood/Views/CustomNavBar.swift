@@ -14,7 +14,9 @@ struct CustomNavBar: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             Tab("Home", systemImage: "house", value: .mood) {
-                ContentView()
+                NavigationStack {
+                    ContentView()
+                }
             }
         
             Tab("History", systemImage: "calendar", value: .history) {

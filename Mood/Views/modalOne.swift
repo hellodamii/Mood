@@ -133,7 +133,7 @@ struct ModalOne: View {
                 onAddFriend: addFriend,
                 showingInviteSheet: $isShowingInviteSheet
             )
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.large])
                 .presentationCornerRadius(32)
         }
     }
@@ -214,7 +214,7 @@ struct FirstSheetContent: View {
                 onAddFriend: onAddFriend,
                 showingInviteSheet: $showingInviteSheet
             )
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.large])
                 .presentationCornerRadius(20)
         }
     }
@@ -275,7 +275,7 @@ struct SecondSheetContent: View {
         .background(Color(.systemBackground))
         .sheet(isPresented: $showingInviteSheet) {
             InviteFriendsSheet()
-                .presentationDetents([.medium])
+                .presentationDetents([.large])
                 .presentationCornerRadius(20)
         }
     }

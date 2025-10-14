@@ -172,9 +172,11 @@ struct ProfileView: View {
             }
             .sheet(isPresented: $showingPersonalDetails) {
                 PersonalDetails()
+                    .presentationDetents([.large])
             }
             .sheet(isPresented: $showingNotificationSettings) {
                 NotificationSettings()
+                    .presentationDetents([.large])
             }
             .onChange(of: showingPersonalDetails) { _, isPresented in
                 if !isPresented {
